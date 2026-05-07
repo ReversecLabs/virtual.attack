@@ -1,0 +1,167 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { parseTestCase } from '../utils/parseTestCase';
+
+const entries = await getCollection('test-cases');
+const techniques = entries
+  .map(e => parseTestCase(e.body, e.slug))
+  .sort((a, b) => a.component.localeCompare(b.component) || a.title.localeCompare(b.title));
+
+const components = [...new Set(techniques.map(t => t.component))].sort();
+const countByComponent = Object.fromEntries(
+  components.map(c => [c, techniques.filter(t => t.component === c).length])
+);
+---
+
+<Layout title="All Techniques">
+  <section class="intro">
+    <h1>Virtual<span>//</span>Attack</h1>
+    <p>
+      {techniques.length} attack techniques for threat emulation in VMware / VCF environments.
+      Each technique maps to a MITRE ATT&amp;CK tactic and includes log sources for detection.
+    </p>
+  </section>
+
+  <div class="controls">
+    <div class="filter-chips" id="filter-chips">
+      <button class="chip active" data-component="all">
+        All <span class="chip-count">{techniques.length}</span>
+      </button>
+      {components.map(comp => (
+        <button class="chip" data-component={comp}>
+          {comp} <span class="chip-count">{countByComponent[comp]}</span>
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <p class="results-count" id="results-count">{techniques.length} techniques</p>
+  <div class="grid" id="technique-grid"></div>
+</Layout>
+
+<script define:vars={{ techniques }}>
+  var COMP_COLORS = {
+    'ESXi': '#2563eb',
+    'vCenter': '#7c3aed',
+    'SDDC Manager': '#059669',
+    'AD': '#d97706',
+    'VCF Automation': '#0891b2',
+    'VCF Operations for Logs': '#dc2626',
+  };
+
+  var ACTOR_PALETTE = [
+    '#e74c3c','#3498db','#2ecc71','#f39c12',
+    '#9b59b6','#1abc9c','#e67e22','#c0392b'
+  ];
+
+  function compColor(comp) {
+    if (!comp) return '#6366f1';
+    for (var key in COMP_COLORS) {
+      if (comp.toLowerCase().includes(key.toLowerCase())) return COMP_COLORS[key];
+    }
+    if (comp.toLowerCase().includes('workspace') || comp.toLowerCase().includes('vidm') || comp.toLowerCase().includes('identity')) return '#db2777';
+    return '#6366f1';
+  }
+
+  function actorColor(name) {
+    var h = 0;
+    for (var i = 0; i < name.length; i++) h = ((h * 31) + name.charCodeAt(i)) | 0;
+    return ACTOR_PALETTE[Math.abs(h) % ACTOR_PALETTE.length];
+  }
+
+  function esc(s) {
+    return String(s || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function renderCard(tc) {
+    var color = compColor(tc.component);
+    var actors = tc.threatActors.slice(0, 4).map(function(a) {
+      var c = actorColor(a);
+      return '<span class="actor-tag" style="background:' + c + '22;border-color:' + c + ';color:' + c + '">' + esc(a) + '</span>';
+    }).join('');
+    var moreActors = tc.threatActors.length > 4
+      ? '<span class="actor-more">+' + (tc.threatActors.length - 4) + '</span>'
+      : '';
+    var desc = esc(tc.description.replace(/\n/g, ' ').slice(0, 240));
+
+    return '<a href="/techniques/' + tc.slug + '" class="technique-card">'
+      + '<div class="card-header">'
+      + '<span class="component-badge" style="background:' + color + '22;border-color:' + color + ';color:' + color + '">' + esc(tc.component) + '</span>'
+      + '<span class="mitre-id">' + esc(tc.mitreId) + '</span>'
+      + '</div>'
+      + '<h3 class="card-title">' + esc(tc.title) + '</h3>'
+      + (tc.tactic ? '<p class="card-tactic">' + esc(tc.tactic) + '</p>' : '')
+      + (desc ? '<p class="card-desc">' + desc + '</p>' : '')
+      + (tc.threatActors.length ? '<div class="card-actors">' + actors + moreActors + '</div>' : '')
+      + '</a>';
+  }
+
+  var activeComponent = 'all';
+  var searchTerm = '';
+
+  function matches(tc) {
+    if (activeComponent !== 'all' && tc.component !== activeComponent) return false;
+    if (!searchTerm) return true;
+    var q = searchTerm.toLowerCase();
+    return (
+      tc.title.toLowerCase().includes(q) ||
+      tc.description.toLowerCase().includes(q) ||
+      tc.component.toLowerCase().includes(q) ||
+      tc.tactic.toLowerCase().includes(q) ||
+      tc.mitreId.toLowerCase().includes(q) ||
+      tc.author.toLowerCase().includes(q) ||
+      tc.threatActors.some(function(a) { return a.toLowerCase().includes(q); })
+    );
+  }
+
+  function renderGrid() {
+    var filtered = techniques.filter(matches);
+    var grid = document.getElementById('technique-grid');
+    var count = document.getElementById('results-count');
+    if (grid) {
+      grid.innerHTML = filtered.length
+        ? filtered.map(renderCard).join('')
+        : '<p class="no-results">No techniques match your search.</p>';
+    }
+    if (count) {
+      count.textContent = filtered.length + ' technique' + (filtered.length !== 1 ? 's' : '');
+    }
+  }
+
+  // Search bar (in header Layout)
+  var searchInput = document.getElementById('global-search');
+  if (searchInput) {
+    var params = new URLSearchParams(window.location.search);
+    var q = params.get('q');
+    if (q) { searchInput.value = q; searchTerm = q; }
+
+    var debounce;
+    searchInput.addEventListener('input', function() {
+      clearTimeout(debounce);
+      debounce = setTimeout(function() {
+        searchTerm = searchInput.value.trim();
+        renderGrid();
+      }, 180);
+    });
+  }
+
+  // Filter chips
+  var chips = document.getElementById('filter-chips');
+  if (chips) {
+    chips.addEventListener('click', function(e) {
+      var chip = e.target.closest('.chip');
+      if (!chip) return;
+      document.querySelectorAll('.chip').forEach(function(c) { c.classList.remove('active'); });
+      chip.classList.add('active');
+      activeComponent = chip.dataset.component;
+      renderGrid();
+    });
+  }
+
+  renderGrid();
+</script>
