@@ -1,0 +1,55 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+}
+const { title = 'All Techniques' } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} — Virtual//Attack</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+
+  </head>
+  <body>
+    <header class="site-header">
+      <a href="/" class="site-logo">Virtual<span>//</span>Attack</a>
+      <div class="search-wrap">
+        <input
+          type="search"
+          id="global-search"
+          class="global-search"
+          placeholder="Search techniques…"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <span class="search-icon">⌕</span>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <script is:inline>
+      // On detail pages: Enter in search bar navigates home with ?q= param
+      (function () {
+        var input = document.getElementById('global-search');
+        if (!input) return;
+        var params = new URLSearchParams(window.location.search);
+        var q = params.get('q');
+        if (q) input.value = q;
+        if (window.location.pathname !== '/') {
+          input.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' && input.value.trim()) {
+              window.location.href = '/?q=' + encodeURIComponent(input.value.trim());
+            }
+          });
+          input.setAttribute('placeholder', 'Search… (Enter to go)');
+        }
+      })();
+    </script>
+  </body>
+</html>
