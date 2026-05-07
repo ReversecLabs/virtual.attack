@@ -13,6 +13,8 @@
 </p>
 
 
+
+
 ## Overview
 
 A comprehensive collection of 70+ individual atacker actions that can be simulated against VCF environments in Purple Team exercises.
@@ -27,9 +29,9 @@ A comprehensive collection of 70+ individual atacker actions that can be simulat
 
 ## 💻 Browse Them Live
 
-Visit https://thedomain....  for a web UI rendered using Astro & Starlight, featuring dynamic filtering and a responsive design.
+Visit https://thedomain....  for a web UI rendered using Astro, featuring dynamic filtering and a responsive design.
 
-Alternatively, [Develop Locally](#Develop-Locally).
+Alternatively, Develop Locally with `npm install && npm run dev`
 
 
 ## How to Use This Project
@@ -66,31 +68,6 @@ Known-malware samples such as BEEFLUSH, VIRTUALPITA are also not included for sa
 
 
 
-
-
-## References
-
-
-
-
-## Develop Locally
-
-1. **Install Node.js** (version 18 or higher)
-
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Run the development server:**
-   ```bash
-   npm run dev
-   ```
-
-4. **Build for production:**
-   ```bash
-   npm run build
-   ```
 
 ## Repository structure
 - Test cases can be found in `src/content`, organised per VCF component
