@@ -8,7 +8,7 @@
 - **Tactic:** Defense Evasion
 
 ## Description
-VCF Operations for Logs (formerly vRealize Log Insight / Aria Operations for Logs) is the centralized log aggregation appliance in the VCF stack, ingesting syslog and CFAPI events from vCenter, ESXi, SDDC Manager, NSX, and other components. The appliance itself is Photon OS-based and writes its own operational logs - admin authentication, config changes, query history, ingestion errors, internal service activity - to /storage/var/loginsight/*.log (and additional locations under /var/log/loginsight/, including upgrade.log). Adversaries with root SSH/console access on the appliance delete these logs to remove evidence of their activity on the appliance itself or other cmponents, by tampering/removing files under /storage/var/loginsight/ and /storage/core/loginsight/cidata/store/ respectively.
+VCF Operations for Logs (formerly vRealize Log Insight / Aria Operations for Logs) is the centralized log aggregation appliance in the VCF stack, ingesting syslog and CFAPI events from vCenter, ESXi, SDDC Manager, NSX, and other components. The appliance itself is PhotonOS-based and writes its own operational logs - admin authentication, config changes, query history, ingestion errors, internal service activity - to /storage/var/loginsight/*.log (and additional locations under /var/log/loginsight/, including upgrade.log). Adversaries with root SSH/console access on the appliance delete these logs to remove evidence of their activity on the appliance itself or other cmponents, by tampering/removing files under /storage/var/loginsight/ and /storage/core/loginsight/cidata/store/ respectively.
 
 ## Threat Actors
 _None_

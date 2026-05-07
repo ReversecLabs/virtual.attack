@@ -8,7 +8,7 @@
 - **Tactic:** Defense Evasion
 
 ## Description
-Adversaries with root access on the VCF Operations for Logs appliance can stop the core loginsight service to halt log ingestion, query, and alerting across the entire VCF estate for the duration of their operations. Test (lab only, on the appliance): SSH as root, /etc/init.d/loginsight stop(or service loginsight stop, or systemctl stop loginsight on newer Photon-based versions)
+Adversaries with root access on the VCF Operations for Logs appliance can stop the core loginsight service to halt log ingestion, query, and alerting across the entire VCF estate for the duration of their operations. Test (lab only, on the appliance): SSH as root, /etc/init.d/loginsight stop(or service loginsight stop, or systemctl stop loginsight on newer PhotonOS-based versions)
 
 ## Threat Actors
 _None_
