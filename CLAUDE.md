@@ -29,49 +29,7 @@ npm run build                # Generate static site to dist/
 
 ## Test Case File Format
 
-Files live in `src/content/test-cases/<component>/` with filenames as hyphenated lowercase slugs of the title (e.g. `create-new-vm-on-esxi.md`).
-
-```markdown
-# <Test Case Name>
-
-## Component
-**<Component>**
-
-## MITRE ATT&CK
-- **ID:** T####.###
-- **Tactic:** <Tactic>
-
-## Description
-<free text>
-
-## Threat Actors
-- <Actor>          ← use _None_ if no known actors
-
-## Log Sources
-- <Log>            ← use _None_ if unknown
-
-## References
-- <URL>            ← use _None_ if no refs
-
-## Author
-<Name>
-```
-
-**Section order is required and must be exact.** No frontmatter (`---` blocks). One test case per file.
-
-## Component Folders
-
-| Folder | Component |
-|--------|-----------|
-| `ad/` | Active Directory |
-| `esxi/` | ESXi |
-| `sddc-manager/` | SDDC Manager |
-| `vcenter/` | vCenter |
-| `vcf-automation/` | VCF Automation |
-| `vcf-operations-for-logs/` | VCF Operations for Logs |
-| `vidm/` | Workspace ONE Identity Manager (vIDM) |
-
-Folder name = lowercase + hyphenated version of the Component field. Create a new folder if adding a new component.
+See [`template.md`](template.md) for the blank template, per-field guidance, component folder mapping, and a worked example.
 
 ## Key Constraints
 

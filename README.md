@@ -72,37 +72,7 @@ Known-malware samples such as BEEFLUSH, VIRTUALPITA are also not included for sa
 ## Repository structure
 - Test cases can be found in `src/content`, organised per VCF component
 - Each test case is a separate `.md` file in `src/content/test-cases/[component]/`. One test case per `.md` file
-- Test case `.md` files look like: 
-
-### Test Case file format
-
-```markdown
-# Create New VM on ESXi
-
-## Component
-**ESXi**
-
-## MITRE ATT&CK
-- **ID:** T1564.006
-- **Tactic:** Defense Evasion
-
-## Description
-Rogue VMs can be created from VMX definition files...
-
-## Threat Actors
-- UNC3886
-- Fire Ant
-
-## Log Sources
-- HOSTD Logs (/var/log/hostd.log)
-- ESXi Shell Logs (/var/log/shell.log)
-
-## References
-- https://...
-
-## Author
-Leonidas Tsaousis (@laripping)
-```
+- See [`template.md`](template.md) for the file format, per-field guidance, and a worked example
 
 
 
@@ -114,6 +84,7 @@ This project is inspired by:
 - [Leonidas](https://github.com/reverseclabs/leonidas) - Cloud Attack Simulation framework, complete with attack definitions 
 - [Detection in the Cloud](https://detectioninthe.cloud/) - Rendered Leonidas attack definitions 
 - [Kubenomicon](https://kubenomicon.com/) - A similar resource for Kubernetes 
+- [Wiz Cloud Threat Landscape](threats.wiz.io) - Browsable UI tracking cloud incidents  
 
 
 
