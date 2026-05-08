@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem -Path \"Z:\\\\Shared\\\\vmware-test-cases-repo\" -Force | Select-Object Name, @{Name=\"Type\"; Expression={if \\($_.PSIsContainer\\) { \"DIR\" } else { \"FILE\" }}} | Format-Table -AutoSize)",
+      "PowerShell(Get-ChildItem -Path \"Z:\\\\Shared\\\\vmware-test-cases-repo\\\\src\" -Force | Select-Object Name, @{Name=\"Type\"; Expression={if \\($_.PSIsContainer\\) { \"DIR\" } else { \"FILE\" }}} | Format-Table -AutoSize)",
+      "PowerShell(Get-ChildItem -Path \"Z:\\\\Shared\\\\vmware-test-cases-repo\\\\.claude\" -Force | Select-Object Name, @{Name=\"Type\"; Expression={if \\($_.PSIsContainer\\) { \"DIR\" } else { \"FILE\" }}} | Format-Table -AutoSize)",
+      "PowerShell(Get-ChildItem -Path \"Z:\\\\Shared\\\\vmware-test-cases-repo\\\\.github\" -ErrorAction SilentlyContinue -Force | Select-Object Name, @{Name=\"Type\"; Expression={if \\($_.PSIsContainer\\) { \"DIR\" } else { \"FILE\" }}} | Format-Table -AutoSize)",
+      "PowerShell(Head *)",
+      "PowerShell(Write-Output \"vmware-test-cases-repo/\"; Get-ChildItem -Path \"Z:\\\\Shared\\\\vmware-test-cases-repo\" -Force | Where-Object { $_.Name -notmatch \"node_modules|\\\\.astro\" } | ForEach-Object { if \\($_.PSIsContainer\\) { Write-Output \"├── $\\($_.Name\\)/\" } else { Write-Output \"├── $\\($_.Name\\)\" } })",
+      "Bash(Get-ChildItem -Path \"Z:\\\\Shared\\\\vmware-test-cases-repo\" -Force)",
+      "Bash(Select-Object Name, FullName)",
+      "Bash(Get-ChildItem -Path \"Z:\\\\Shared\\\\vmware-test-cases-repo\\\\src\\\\content\\\\test-cases\" -Recurse -File)",
+      "Bash(Select-Object FullName)",
+      "Bash(Sort-Object FullName)",
+      "PowerShell(Get-ChildItem -Path \"Z:\\\\Shared\\\\vmware-test-cases-repo\\\\src\\\\content\\\\test-cases\" -Recurse | Where-Object { $_.PSIsContainer -eq $false } | Select-Object FullName)",
+      "WebFetch(domain:threats.wiz.io)",
+      "Bash(timeout 20 npm run dev)",
+      "PowerShell(\\(Get-ChildItem \"Z:\\\\Shared\\\\vmware-test-cases-repo\\\\node_modules\" | Measure-Object\\).Count)",
+      "Bash(npm run *)",
+      "PowerShell(npm run *)",
+      "Bash(dir \"C:/Users/a10ker/Documents/vmware-test-cases-repo/scripts\")",
+      "Bash(dir *)",
+      "WebSearch",
+      "Skill(add-test-case)"
+    ]
+  }
+}

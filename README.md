@@ -17,7 +17,7 @@
 
 ## Overview
 
-A comprehensive collection of 70+ individual atacker actions that can be simulated against VCF environments in Purple Team exercises.
+A comprehensive collection of 80+ individual atacker actions that can be simulated against VCF environments in Purple Team exercises.
 
 - 🔬**Real-world Threats**: The majority of test cases has been extracted from threat intelligence reports detailing real-world vSphere incidents. *Additionally, a few more test cases have been added that have not yet been documented, but can be executed practively to assess controls and tailor detections.* 
 
