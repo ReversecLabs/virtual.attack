@@ -15,56 +15,62 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 const tc = parseTestCase(entry.body, entry.slug);
 
+// Component palette — harmonised with deep-purple + lime theme
 const COMP_COLORS: Record<string, string> = {
-  'ESXi': '#2563eb',
-  'vCenter': '#7c3aed',
-  'SDDC Manager': '#059669',
-  'AD': '#d97706',
-  'VCF Automation': '#0891b2',
-  'VCF Operations for Logs': '#dc2626',
+  'ESXi':                    '#B6F528',
+  'vCenter':                 '#8b5cf6',
+  'SDDC Manager':            '#4ecdc4',
+  'AD':                      '#ffb74d',
+  'VCF Automation':          '#4fc3f7',
+  'VCF Operations for Logs': '#f06292',
 };
 
 function compColor(comp: string): string {
   for (const [key, val] of Object.entries(COMP_COLORS)) {
     if (comp.toLowerCase().includes(key.toLowerCase())) return val;
   }
-  if (/workspace|vidm|identity/i.test(comp)) return '#db2777';
-  return '#6366f1';
+  if (/workspace|vidm|identity/i.test(comp)) return '#80cbc4';
+  return '#6b5a78';
 }
 
 const color = compColor(tc.component);
 ---
 
 <Layout title={tc.title}>
-  <a href="/" class="back-link">← All techniques</a>
+  <main>
+    <a href="/" class="back-link">← All techniques</a>
 
-  <div class="technique-detail-header">
-    <div class="detail-meta">
-      <span
-        class="component-badge"
-        style={`background:${color}22;border-color:${color};color:${color}`}
-      >
-        {tc.component}
-      </span>
-      {tc.mitreId && (
-        <span class="mitre-id">{tc.mitreId}</span>
-      )}
+    <div class="technique-detail-header">
+      <div class="detail-meta">
+        <span
+          class="component-badge"
+          style={`background:${color}1f;border:1px solid ${color}66;color:${color}`}
+        >
+          {tc.component}
+        </span>
+        {tc.mitreId && (
+          <span class="mitre-id">{tc.mitreId}</span>
+        )}
+      </div>
+      <h1 class="detail-title">{tc.title}</h1>
+      <div class="detail-sub">
+        {tc.tactic && <span>{tc.tactic}</span>}
+      </div>
+      {tc.author && <div class="detail-author">By {tc.author}</div>}
     </div>
-    <h1 class="detail-title">{tc.title}</h1>
-    <div class="detail-sub">
-      {tc.tactic && <span>{tc.tactic}</span>}
-    </div>
-    
-  </div>
 
-  <div class="technique-content">
-    <Content />
-  </div>
+    <div class="technique-content">
+      <Content />
+    </div>
+  </main>
 </Layout>
 
 <script is:inline>
   (function () {
-    var PALETTE = ['#e74c3c','#3498db','#2ecc71','#f39c12','#9b59b6','#1abc9c','#e67e22','#c0392b'];
+    var PALETTE = [
+      '#7c5cff', '#3a7ca5', '#2ecc71', '#d97706',
+      '#9b59b6', '#1abc9c', '#e67e22', '#c0392b'
+    ];
 
     function actorColor(name) {
       var h = 0;
@@ -72,7 +78,7 @@ const color = compColor(tc.component);
       return PALETTE[Math.abs(h) % PALETTE.length];
     }
 
-    // Find the "Threat Actors" h2 and style its following list
+    // Style the "Threat Actors" list
     var headings = document.querySelectorAll('.technique-content h2');
     for (var i = 0; i < headings.length; i++) {
       if (headings[i].textContent.trim() === 'Threat Actors') {
@@ -85,11 +91,11 @@ const color = compColor(tc.component);
             if (name && name !== 'None' && name !== '_None_') {
               var c = actorColor(name);
               items[j].classList.add('actor-tag');
-              items[j].style.background = c + '22';
-              items[j].style.borderColor = c;
+              items[j].style.background = c + '14';
+              items[j].style.borderColor = c + '55';
               items[j].style.color = c;
-              items[j].style.border = '1px solid ' + c;
-              items[j].style.borderRadius = '3px';
+              items[j].style.border = '1px solid ' + c + '55';
+              items[j].style.borderRadius = '2px';
               items[j].style.padding = '2px 8px';
               items[j].style.display = 'inline-block';
             } else {
