@@ -4,37 +4,99 @@ import '../styles/global.css';
 interface Props {
   title?: string;
 }
-const { title = 'All Techniques' } = Astro.props;
+const { title = 'Virtual//Attack' } = Astro.props;
 ---
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title} — Virtual//Attack</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
-
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'><polygon points='13,1 24,7 13,13 2,7' fill='%23B6F528'/><polygon points='2,7 13,13 13,25 2,19' fill='%232A6FDB'/><polygon points='24,7 13,13 13,25 24,19' fill='%231C0728'/></svg>" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script is:inline>
+      // Theme — read saved before paint to avoid flash
+      (function () {
+        try {
+          var t = localStorage.getItem('va-theme');
+          if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <header class="site-header">
-      <a href="/" class="site-logo">Virtual<span>//</span>Attack</a>
-      <div class="search-wrap">
-        <input
-          type="search"
-          id="global-search"
-          class="global-search"
-          placeholder="Search techniques…"
-          autocomplete="off"
-          spellcheck="false"
-        />
-        <span class="search-icon">⌕</span>
+      <div class="site-header-inner">
+        <a href="/" class="site-logo" aria-label="Virtual//Attack home">
+          <svg class="site-logo-mark" viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <polygon points="13,1 24,7 13,13 2,7" fill="#B6F528" />
+            <polygon points="2,7 13,13 13,25 2,19" fill="#2A6FDB" />
+            <polygon points="24,7 13,13 13,25 24,19" fill="#1C0728" />
+          </svg>
+          <span class="site-logo-text">Virtual<span class="slash">//</span>Attack</span>
+        </a>
+        <a class="site-by" href="https://labs.reversec.com" aria-label="by Reversec Labs" data-logo-slot="reversec-labs">
+          <span class="by-prefix">by</span>
+          <!-- TODO: replace the inner span with the official Reversec Labs logo SVG -->
+          <span class="by-logo-slot"><img src="/logo.png" style="height:28px;width:160px"></img></span>
+        </a>
+        <span class="header-spacer"></span>
+        <div class="search-wrap">
+          <span class="search-icon">⌕</span>
+          <input
+            type="search"
+            id="global-search"
+            class="global-search"
+            placeholder="Search techniques…"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <span class="search-kbd">/</span>
+        </div>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="theme-icon">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
       </div>
     </header>
-    <main>
-      <slot />
-    </main>
+
+    <slot />
+
     <script is:inline>
-      // On detail pages: Enter in search bar navigates home with ?q= param
+      // Theme toggle (light ↔ dark)
+      (function () {
+        var KEY = 'va-theme';
+        var root = document.documentElement;
+        var btn = document.getElementById('theme-toggle');
+        var icon = document.getElementById('theme-icon');
+        if (!btn || !icon) return;
+
+        var SUN = '<circle cx="12" cy="12" r="4"></circle>' +
+                  '<path d="M12 2v2"></path><path d="M12 20v2"></path>' +
+                  '<path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path>' +
+                  '<path d="M2 12h2"></path><path d="M20 12h2"></path>' +
+                  '<path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path>';
+        var MOON = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+
+        function apply(t) {
+          root.setAttribute('data-theme', t);
+          icon.innerHTML = (t === 'dark') ? SUN : MOON;
+        }
+        apply(root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light');
+        btn.addEventListener('click', function () {
+          var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+          apply(next);
+          try { localStorage.setItem(KEY, next); } catch (e) {}
+        });
+      })();
+
+      // Search: on detail pages, Enter navigates to /?q=…
       (function () {
         var input = document.getElementById('global-search');
         if (!input) return;
@@ -49,6 +111,23 @@ const { title = 'All Techniques' } = Astro.props;
           });
           input.setAttribute('placeholder', 'Search… (Enter to go)');
         }
+      })();
+
+      // "/" focuses search anywhere
+      (function () {
+        var input = document.getElementById('global-search');
+        if (!input) return;
+        document.addEventListener('keydown', function (e) {
+          if (e.key === '/' && document.activeElement !== input &&
+              document.activeElement.tagName !== 'INPUT' &&
+              document.activeElement.tagName !== 'TEXTAREA') {
+            e.preventDefault();
+            input.focus();
+          }
+          if (e.key === 'Escape' && document.activeElement === input) {
+            input.blur();
+          }
+        });
       })();
     </script>
   </body>
