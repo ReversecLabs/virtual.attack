@@ -4,10 +4,8 @@
 
 > Browse them live at https://virtualatt.ac
 
-
-<!-- TODO CHANGE SHIELDS BELOW -->
 <p align="center">
-  <img src="project-logo.png"><br /><br />
+  <img width="75%" src="project-logo.png"><br /><br />
   <img alt="Techniques" src="https://img.shields.io/badge/Techniques-86-flat.svg?style=flat-square">
   <img alt="Components" src="https://img.shields.io/badge/Components-7-flat.svg?style=flat-square">
   <img alt="GitHub License" src="https://img.shields.io/github/license/reverseclabs/leonidas?style=flat">
@@ -44,8 +42,6 @@ By cloning this repo and maintaining internally for their own environment, purpl
 ## The Techniques
 
 
-<!-- ## Repository structure -->
-
 Test cases can be found in `src/content`, organised per VCF component. Each test case is a separate `.md` file in `src/content/test-cases/[component]/`, with only one technique allowed in every `.md` file.
 
 
@@ -53,11 +49,14 @@ Test cases can be found in `src/content`, organised per VCF component. Each test
 **📦 What Is Covered & What Not**
 
 
-- **Beyond vSphere**: This collection includes not only the usual vCenter and ESXi attacks, but covers also VMware components of security significance in the [VCF](https://www.vmware.com/products/cloud-infrastructure/vmware-cloud-foundation) ecosystem such as the [SDDC Manager](https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-0/design/design-library/vcf-operations-design/sddc-manager.html), as well as crucial integrations like Active Directory.  
+- **Beyond vSphere** - This collection includes not only the usual vCenter and ESXi attacks, but covers also VMware components of security significance in the [VCF](https://www.vmware.com/products/cloud-infrastructure/vmware-cloud-foundation) ecosystem such as the [SDDC Manager](https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-0/design/design-library/vcf-operations-design/sddc-manager.html), as well as crucial integrations like Active Directory.  
 
-- **Reproducible**: For the offensive practitioner, each technique comes with detailed insructions and links to origin sources to ensure each test case can be carried out reproducibly.  
+- **Real World techniques** - The majority of test cases have been extracted from threat intelligence reports detailing real-world vSphere incidents. Additionally, a few test cases have been included that are _not yet documented_, but can be executed practively to assess controls and tailor detections. 
+ 
 
-- **Defender-friendly**: For the blue teamer, each test case also comes with the Log Sources where evidence is expected to be recorded, aiding the triage process.  
+- **Reproducible** - For the offensive practitioner, each technique comes with detailed insructions and links to origin sources to ensure each test case can be carried out reproducibly.  
+
+- **Defender-friendly** - For the blue teamer, each test case also comes with the Log Sources where evidence is expected to be recorded, aiding the triage process.  
 
 A design decision was made during compilation of the collection to leave out: 
 
@@ -81,16 +80,6 @@ To add new test cases, simply:
 1. Add new `.md` files following the [`template.md`](template.md)
 1. Make sure it looks as expected with `npm install && npm run dev`
 1. Open a Merge Request 
-
-
-- 🔬**Real-world Threats**: The majority of test cases has been extracted from threat intelligence reports detailing real-world vSphere incidents. *Additionally, a few more test cases have been added that have not yet been documented, but can be executed practively to assess controls and tailor detections.* 
- 
-
-
-
-
-
-
 
 
 
