@@ -272,7 +272,7 @@ a { color: inherit; }
   max-width: 640px;
   text-wrap: pretty;
 }
-.hero-lead strong { color: var(--paper); font-weight: 600; }
+.hero-lead strong { color: var(--lime); font-weight: 600; }
 
 /* ─── Main reading area ────────────────────────────────────── */
 main {
