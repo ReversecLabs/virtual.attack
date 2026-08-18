@@ -169,6 +169,28 @@ a { color: inherit; }
 }
 .theme-toggle svg { width: 16px; height: 16px; }
 
+/* GitHub button */
+.github-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid rgba(244, 244, 244, 0.2);
+  color: rgba(244, 244, 244, 0.85);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+  flex-shrink: 0;
+  margin-right: 0px;
+}
+.github-btn:hover {
+  background: rgba(244, 244, 244, 0.08);
+  border-color: rgba(244, 244, 244, 0.35);
+  color: #fff;
+}
+
 /* search (header) */
 .search-wrap { position: relative; display: flex; align-items: center; }
 .global-search {
