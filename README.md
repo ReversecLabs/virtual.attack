@@ -2,16 +2,17 @@
 
 *Attack techniques for Threat Emulation in VMware environments*
 
-> Browse them live at https://virtualatt.ac
+> Browse them live at https://virtualattack.reversec.com
 
 <p align="center">
   <img width="75%" src="project-logo.png"><br /><br />
-  <img alt="Techniques" src="https://img.shields.io/badge/Techniques-86-flat.svg?style=flat-square">
-  <img alt="Components" src="https://img.shields.io/badge/Components-7-flat.svg?style=flat-square">
+  <img alt="Techniques" src="https://img.shields.io/badge/Techniques-86-flat.svg">
+  <img alt="Components" src="https://img.shields.io/badge/Components-7-flat.svg">
   <img alt="GitHub License" src="https://img.shields.io/github/license/reverseclabs/leonidas?style=flat">
+  </br>
   <a href="https://astro.build"><img src="https://astro.badg.es/v2/built-with-astro/tiny.svg" alt="Built with Astro" width="120" height="20"></a>
+  <a href="https://reverseclabs.github.io/virtual.attack"><img alt="Hosted on GitHub Pages" src="https://img.shields.io/badge/Hosted_On_GitHub_Pages-100000?style=flat&amp;logo=githubpages&amp;logoColor=white"></a>
 </p>
-
 
 
 
@@ -21,10 +22,9 @@ A comprehensive collection of 80+ individual atacker actions that can be simulat
 
 ## The problem
 
-> [!IMPORTANT] 
-> Detection capability in VMware/VCF/vSphere estates remains low or inexistent.  
+> *Detection capability in VMware/VCF/vSphere estates remains low or inexistent*  
 
-Despite the criticality of the virtualisation environment, organisations do not proactively invest in the resilience against threats 
+Despite the criticality of the virtualisation environment, organisations do not proactively invest in the resilience against threats... 
 
 ## How to use this project
 
@@ -67,7 +67,7 @@ A design decision was made during compilation of the collection to leave out:
 
 **💻 Browse The Collection** 
 
-Visit https://virtualatt.ac for an HTML UI powered by [Astro](astro.build), featuring dynamic test case/VMware component filtering, a responsive design, and even a dark theme!
+Visit [virtualattack.reversec.com](https://virtualattack.reversec.com) for an HTML UI powered by [Astro](astro.build), featuring dynamic test case/VMware component filtering, a responsive design, and even a dark theme!
 
 
 **🤝Contributing**
@@ -77,9 +77,15 @@ As the VCF threat landscape evolves, contributions by the community are welcome 
 To add new test cases, simply:
 
 1. Fork the repo
-1. Add new `.md` files following the [`template.md`](template.md)
-1. Make sure it looks as expected with `npm install && npm run dev`
-1. Open a Merge Request 
+2. (Optional) Check out the `/add-test-case` [agent skill](.claude/skills/add-test-case/SKILL.md) to streamline authoring of standard .md test cases from e.g. a threat intellifgence link 
+
+3. Add new `.md` files following the [`template.md`](template.md)
+4. Make sure it looks as expected with `npm install && npm run dev`
+5. (Optional) Set up the pre-commit hook that runs the [`generate-badge.py`](scripts/generate-badge.py) script to auto-update Technique & Component badges   
+  ```
+  cp .hooks/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
+  ```
+6. Open a Merge Request 
 
 
 

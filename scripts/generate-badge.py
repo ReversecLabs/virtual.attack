@@ -3,6 +3,7 @@
 
 import glob
 import os
+import re
 import urllib.parse
 
 
@@ -54,6 +55,29 @@ def main():
         with open(os.environ["GITHUB_OUTPUT"], "a") as fh:
             print(f"test_badge={test_badge}", file=fh)
             print(f"component_badge={component_badge}", file=fh)
+
+    # Update README.md with new badges
+    readme_path = "README.md"
+    if os.path.exists(readme_path):
+        update_readme(readme_path, test_badge, component_badge)
+
+
+def update_readme(readme_path, test_badge, component_badge):
+    """Update the README.md file with the new badge URLs."""
+    with open(readme_path, "r") as f:
+        content = f.read()
+
+    # Pattern to match the existing badge URLs in the badges section
+    test_pattern = r'https://img\.shields\.io/badge/Techniques-[0-9]+.*?\.svg\?style=flat-square'
+    component_pattern = r'https://img\.shields\.io/badge/Components-[0-9]+.*?\.svg\?style=flat-square'
+
+    content = re.sub(test_pattern, test_badge, content)
+    content = re.sub(component_pattern, component_badge, content)
+
+    with open(readme_path, "w") as f:
+        f.write(content)
+
+    print(f"Updated {readme_path} with new badges")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# Pre-commit hook to update badges in README.md
+#
+
+# Run the badge generation script
+echo "Running badge generation script..."
+python3 scripts/generate-badge.py
+
+# Check if README.md was modified
+if git diff --quiet README.md; then
+    echo "No badge updates needed."
+else
+    echo "Badges updated in README.md. Adding changes..."
+    git add README.md
+    echo "README.md changes staged."
+fi
+
+exit 0
