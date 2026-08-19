@@ -1,0 +1,73 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+# Default: deny all permissions; each job grants only what it needs
+permissions: {}
+
+concurrency:
+  group: "pages"
+  # Cancel in-progress runs on PRs; never cancel an active production deploy
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read  # checkout only
+    steps:
+      - name: Checkout repository
+        # actions/checkout v4.2.2 — pinned to full commit SHA (mitigates tag mutation risk)
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+
+      - name: Setup Node.js
+        # actions/setup-node v4.4.0
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '20.19.2'  # pin to specific patch version
+          cache: 'npm'
+          cache-dependency-path: 'package-lock.json'
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline
+
+      - name: Build static site
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: Add .nojekyll
+        # Prevents GitHub Pages from running Jekyll on the static output,
+        # which would strip files/folders prefixed with _ (e.g. _astro/)
+        run: touch dist/.nojekyll
+
+      - name: Upload artifact
+        # actions/upload-pages-artifact v3.0.1 — pinned to full commit SHA
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa
+        with:
+          path: ./dist
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    # Only deploy on direct pushes to main — not on pull_request builds
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      pages: write      # deploy to Pages
+      id-token: write   # authenticate via OIDC
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        # actions/deploy-pages v4.0.5
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e
