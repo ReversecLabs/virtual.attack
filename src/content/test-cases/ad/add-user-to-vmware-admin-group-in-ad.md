@@ -1,4 +1,4 @@
-# Add user to VMWare Admin group in AD
+# Add user to VMware Admin group in AD
 
 ## Component
 **AD**
@@ -8,7 +8,7 @@
 - **Tactic:** Privilege Escalation
 
 ## Description
-In environments where VMWare is integrated with AD, members of the relevant AD group will obtain privileged access to the VCF administration.
+In environments where VMware is integrated with AD, members of the relevant AD group will obtain privileged access to the VCF administration.
 
 ## Threat Actors
 - UNC3944

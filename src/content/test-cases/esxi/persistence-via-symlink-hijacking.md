@@ -8,7 +8,7 @@
 - **Tactic:** Persistence
 
 ## Description
-Similar to the common Linux technique, well-known and commonly used symlinks can be modified with approrpiate permissions to point to attacker-controlled binaries. An example in ESXi would be the `esxcli` which normally points to `/bin/esxcli.py`. The link can be modified using command `ln -s` to e.g. pass the original arguments to the legitimate binary, after executing a malicious command.  
+Similar to the common Linux technique, well-known and commonly used symlinks can be modified with appropriate permissions to point to attacker-controlled binaries. An example in ESXi would be the `esxcli` which normally points to `/bin/esxcli.py`. The link can be modified using command `ln -s` to e.g. pass the original arguments to the legitimate binary, after executing a malicious command.  
 
 ## Threat Actors
 _None_

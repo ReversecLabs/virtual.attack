@@ -1,4 +1,4 @@
-# Add user to VMWware admin group in vIDM
+# Add user to VMware admin group in vIDM
 
 ## Component
 **vIDM**

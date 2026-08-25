@@ -8,7 +8,13 @@
 - **Tactic:** Defense Evasion
 
 ## Description
-Stealthier variant of "Disable ESXi Lockdown Mode." Rather than turning Lockdown off, the attacker leaves Lockdown enabled and adds their own principal to the per-host Exception Users list. Users on this list retain whatever privileges they have on the host even when Lockdown is in force - so direct SSH/Host Client/DCUI access continues to work for that one principal, while the host still reports "Lockdown: Enabled" to compliance tooling. Important precondition: the user must already have admin privileges on the host (locally provisioned or via host-level AD permissions). Paths: (3) From the ESXi Host Client UI (TCP/443/ui): Manage -> Security & users -> Lockdown mode -> Exception users.
+Stealthier variant of "Disable ESXi Lockdown Mode." 
+
+Rather than turning Lockdown off, the attacker leaves Lockdown enabled and adds their own principal to the per-host Exception Users list. Users on this list retain whatever privileges they have on the host even when Lockdown is in force - so direct SSH/Host Client/DCUI access continues to work for that one principal, while the host still reports "Lockdown: Enabled" to compliance tooling. 
+
+Important precondition: the user must already have admin privileges on the host (locally provisioned or via host-level AD permissions). 
+
+From the ESXi Host Client UI (TCP/443/ui): Manage -> Security & users -> Lockdown mode -> Exception users.
 
 ## Threat Actors
 _None_

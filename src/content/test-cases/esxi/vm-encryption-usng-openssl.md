@@ -1,4 +1,4 @@
-# VM Encryption usng openssl
+# VM Encryption using openssl
 
 ## Component
 **ESXi**
@@ -8,7 +8,7 @@
 - **Tactic:** Impact
 
 ## Description
-Low-effort / low-sohpistication ransomware variants utilised the native openssl utility to encrypt VMDKs using AES
+Low-effort / low-sophistication ransomware variants utilised the native openssl utility to encrypt VMDKs using AES
 
 ## Threat Actors
 - fcker

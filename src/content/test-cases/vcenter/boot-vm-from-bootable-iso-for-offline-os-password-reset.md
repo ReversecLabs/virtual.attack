@@ -8,21 +8,16 @@
 - **Tactic:** Privilege Escalation
 
 ## Description
-The attacker mounts a bootable utility ISO (e.g. PCUnlocker, Lazesoft, Hiren's BootCD) to a powered-off target VM via vCenter, modifies VM boot order to boot from CD-ROM, and uses the live environment to reset the local administrator password on the guest OS, bypassing domain authentication. UNC3944 documented this against domain controllers and admin workstations.
+Under certain conditions (no secure boot, no disk encryption at rest) an attacker can mount a bootable utility ISO (e.g. PCUnlocker, Lazesoft, Hiren's BootCD) to a powered-off target VM via vCenter, and modify VM boot order to boot from CD-ROM. Then using the live environment, they could reset the local administrator password on the guest OS, bypassing domain authentication. 
 
 ## Threat Actors
-- UNC3944
-- Scattered Spider
-- Octo Tempest
-- 0ktapus
-- Muddled Libra
+
 
 ## Log Sources
 - VPXD Logs (/var/log/vmware/vpxd/vpxd.log)
 - HOSTD Logs (/var/log/hostd.log)
 
 ## References
-- https://cloud.google.com/blog/topics/threat-intelligence/defending-vsphere-from-unc3944
 
 ## Author
 Leonidas Tsaousis (@laripping)
