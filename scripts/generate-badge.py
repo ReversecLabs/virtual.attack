@@ -68,8 +68,8 @@ def update_readme(readme_path, test_badge, component_badge):
         content = f.read()
 
     # Pattern to match the existing badge URLs in the badges section
-    test_pattern = r'https://img\.shields\.io/badge/Techniques-[0-9]+.*?\.svg\?style=flat-square'
-    component_pattern = r'https://img\.shields\.io/badge/Components-[0-9]+.*?\.svg\?style=flat-square'
+    test_pattern = r'https://img\.shields\.io/badge/Techniques-[0-9]+.*?\.svg'
+    component_pattern = r'https://img\.shields\.io/badge/Components-[0-9]+.*?\.svg'
 
     content = re.sub(test_pattern, test_badge, content)
     content = re.sub(component_pattern, component_badge, content)
