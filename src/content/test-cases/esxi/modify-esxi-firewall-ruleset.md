@@ -13,6 +13,7 @@ With root on an ESXi host, the attacker disables the ESXi firewall or relaxes ru
 ## Threat Actors
 - UNC3886
 - Fire Ant
+- VECT Ransomware
 
 ## Log Sources
 - HOSTD Logs (/var/log/hostd.log)
@@ -22,6 +23,7 @@ With root on an ESXi host, the attacker disables the ESXi firewall or relaxes ru
 ## References
 - https://www.sygnia.co/blog/fire-ant-a-deep-dive-into-hypervisor-level-espionage/
 - https://cloud.google.com/blog/topics/threat-intelligence/esxi-hypervisors-malware-persistence
+- https://research.checkpoint.com/2026/vect-ransomware-by-design-wiper-by-accident/
 
 ## Author
 Leonidas Tsaousis (@laripping)
