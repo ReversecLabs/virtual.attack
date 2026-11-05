@@ -34,7 +34,6 @@ _None_
 - HOSTD Logs (/var/run/log/hostd.log)
 
 ## References
-- https://attack.mitre.org/techniques/T1529/
 - https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere-sdks-tools/8-0/esxcli-concepts-and-examples-8-0/managing-hosts/stopping-and-rebooting-hosts-with-esxcli.html
 - https://knowledge.broadcom.com/external/article/317245/determining-why-an-esxi-host-was-powered.html
 - https://knowledge.broadcom.com/external/article/306962/location-of-esxi-log-files.html

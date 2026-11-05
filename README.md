@@ -6,7 +6,7 @@
 
 <p align="center">
   <img width="75%" src="project-logo.png"><br /><br />
-  <img alt="Techniques" src="https://img.shields.io/badge/Techniques-91-flat.svg">
+  <img alt="Techniques" src="https://img.shields.io/badge/Techniques-93-flat.svg">
   <img alt="Components" src="https://img.shields.io/badge/Components-7-flat.svg">
   <img alt="GitHub License" src="https://img.shields.io/github/license/reverseclabs/leonidas?style=flat">
   </br>

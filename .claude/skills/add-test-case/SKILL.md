@@ -25,6 +25,7 @@ The collection of test cases lives in `src/content/test-cases` organised per com
 ### References and MITRE metadata
 - research for threat intelligence to populate References, Threat Actors sections
 - MITRE ATT&CK TTP ID & Tactic might have more than one candidate, pick the most defensible, most relevant one, without asking for confirmation
+- don't add attack.mitre.org links in references
 
 ### Logs
 - for the Log Sources section, research Broadcom/VMware product documentation, ideally latest unless we're explicitly refering to an older version, as well as 3rd party blogs (like williamlam.com), or threat detection guidance from e.g. Mandiant
